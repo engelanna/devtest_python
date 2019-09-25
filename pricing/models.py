@@ -1,29 +1,48 @@
 from django.db import models
 from encrypted_model_fields.fields import EncryptedCharField
 
+
 class PanelProvider(models.Model):
+  def __str__(self): return "code: %s" % self.code
+
   code = models.CharField(max_length=20)
 
+
 class TargetGroup(models.Model):
+  def __str__(self): return "%s, external_id: %s" % (self.name, self.external_id)
+
   parent = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
   panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
+
   external_id = models.IntegerField(default=None)
   name = models.CharField(max_length=100)
   secret_code = EncryptedCharField(max_length=100)
 
+
 class Country(models.Model):
-  country_code = models.CharField(max_length=20)
-  panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL) # models.OneToOneField, models.ManyToManyField
+  def __str__(self): return "country_code: %s" % self.country_code
+
+  panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
   target_groups = models.ManyToManyField(TargetGroup) # TODO: Only root nodes
 
+  country_code = models.CharField(max_length=20)
+
+
 class LocationGroup(models.Model):
+  def __str__(self): return "name: %s" % self.name
+
   country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
   panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
+
   name = models.CharField(max_length=100)
 
+
 class Location(models.Model):
-  external = models.IntegerField(default=None)
+  def __str__(self): return "name: %s" % self.name
+
   location_groups = models.ManyToManyField(LocationGroup)
+
+  external_id = models.IntegerField(default=None)
   name = models.CharField(max_length=100)
   secret_code = EncryptedCharField(max_length=100)
 

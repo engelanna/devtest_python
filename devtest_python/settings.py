@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "pricing.apps.PricingConfig",
     "django_extensions",
-    "encrypted_model_fields"
+    "encrypted_model_fields",
+    "faker"
 ]
 
 MIDDLEWARE = [
