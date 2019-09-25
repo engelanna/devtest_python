@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from cryptography.fernet import Fernet as frt
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "g&1o*j=9#c7c3a3u@*85nb5jahlo!is5*v6z!&+noiy#6urp5*"
+FIELD_ENCRYPTION_KEY = b"_BY91OK--AkcDwZCDy46owitesPoBT5kdMiLPQavU5M="
 
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = True
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "pricing.apps.PricingConfig",
     "django_extensions",
+    "encrypted_model_fields"
 ]
 
 MIDDLEWARE = [

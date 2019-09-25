@@ -1,4 +1,5 @@
 from django.db import models
+from encrypted_model_fields.fields import EncryptedCharField
 
 class PanelProvider(models.Model):
   code = models.CharField(max_length=20)
@@ -8,7 +9,7 @@ class TargetGroup(models.Model):
   panel_provider_id = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
   external_id = models.IntegerField(default=None)
   name = models.CharField(max_length=100)
-  secret_code = models.CharField(max_length=100) # TODO: EncryptedCharField
+  secret_code = EncryptedCharField(max_length=100)
 
 class Country(models.Model):
   country_code = models.CharField(max_length=20)
@@ -24,7 +25,7 @@ class Location(models.Model):
   external_id = models.IntegerField(default=None)
   location_groups = models.ManyToManyField(LocationGroup)
   name = models.CharField(max_length=100)
-  secret_code = models.CharField(max_length=100) # TODO: EncryptedCharField
+  secret_code = EncryptedCharField(max_length=100)
 
 
 
