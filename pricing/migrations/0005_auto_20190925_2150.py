@@ -2,46 +2,120 @@
 
 from django.db import migrations
 from faker import Faker
+from pricing.models import PanelProvider, Country, Location, LocationGroup, TargetGroup
+
+import random
+
+
+def seed_the_models(_apps, _schema_editor):
+  panel_provider_ids = create_panel_providers()
+
+  create_target_groups(panel_provider_ids)
+
+  country_ids = create_countries(panel_provider_ids)
+
+  create_location_groups(panel_provider_ids, country_ids)
+  create_locations()
 
 
 class Migration(migrations.Migration):
+  dependencies = [
+    ("pricing", "0004_auto_20190925_2005"),
+  ]
 
-    dependencies = [
-        ('pricing', '0004_auto_20190925_2005'),
-    ]
-
-    operations = [
-      migrations.RunPython(populate_models),
-    ]
-
-
-def populate_models(apps, schema_editor):
-  db_alias = schema_editor.connection.alias
-
-  populate_model(db_alias, "PanelProvider", 3)
-  populate_model(db_alias, "TargetGroup", 4)
-  populate_model(db_alias, "Country", 3)
-  populate_model(db_alias, "LocationGroup", 4)
-  populate_model(db_alias, "Location", 20)
+  operations = [
+    migrations.RunPython(seed_the_models),
+  ]
 
 
-def populate_model(db_alias, model_name, record_count=1):
-  model = apps.get_model("pricing", model_name)
+def create_panel_providers():
+  newly_inserted_ids = []
+  faker = Faker()
 
-  for _ in range(record_count):
-    model()
-    Country.objects.using(db_alias).create(
-      Country(name="USA", code="us"),
-        Country(name="France", code="fr"),
-    ])
+  for _ in range(3):
+    new_provider = PanelProvider()
+    new_provider.code = faker.bs()
+    new_provider.save()
+    newly_inserted_ids.append(new_provider.id)
+
+  return newly_inserted_ids
 
 
-  apps.get_model("myapp", "Country")
+def create_target_groups(provider_ids):
+  root_group_ids = create_root_target_groups(provider_ids)
+  create_children_target_groups(root_group_ids, provider_ids)
 
-"""
-3 Countries, each with different panel provider
-3 Panel Providers
-20 Locations of any type (city, region, state, etc.)
-4 Location Groups, 3 of them with different provider and 1 would belong to any of them
-4 root Target Groups and each root should start a tree which is minimium 3 levels deep (3 of them with different provider and 1 would belong to any of them)
-"""
+
+def create_root_target_groups(all_provider_choices):
+  provider_choices_left = set(all_provider_choices)
+  root_group_ids = []
+  faker = Faker()
+
+  for _ in range(4):
+    root_group = TargetGroup()
+    root_group.name = faker.slug()
+    root_group.external_id = faker.random_int()
+    root_group.secret_code = faker.uuid4()
+    root_group.panel_provider_id = \
+      provider_choices_left.pop() if any(provider_choices_left) else random.choice(all_provider_choices)
+
+    root_group.save()
+    root_group_ids.append(root_group.id)
+
+  return root_group_ids
+
+
+def create_children_target_groups(root_group_ids, provider_choices):
+  faker = Faker()
+
+  for root_group in TargetGroup.objects.filter(id__in=root_group_ids):
+    parent = root_group
+
+    for nesting in range(3):
+      child_group = TargetGroup()
+      child_group.name = faker.slug()
+      child_group.external_id = faker.random_int()
+      child_group.secret_code = faker.uuid4()
+      child_group.panel_provider_id = random.choice(provider_choices)
+      child_group.parent = parent
+      child_group.save()
+
+
+def create_countries(all_provider_choices):
+  remaining_providers = set(all_provider_choices)
+  newly_inserted_ids = []
+  faker = Faker()
+
+  for _ in range(3):
+    new_country = Country()
+    new_country.country_code = faker.country_code()
+    new_country.panel_provider_id = \
+      remaining_providers.pop() if any(remaining_providers) else random.choice(all_provider_choices)
+    new_country.save()
+    newly_inserted_ids.append(new_country.id)
+
+  return newly_inserted_ids
+
+
+def create_location_groups(all_provider_choices, country_ids):
+  remaining_providers = set(all_provider_choices)
+  faker = Faker()
+
+  for _ in range(4):
+    new_group = LocationGroup()
+    new_group.country_id = random.choice(country_ids)
+    new_group.name = faker.country()
+    new_group.panel_provider_id = \
+      remaining_providers.pop() if any(remaining_providers) else random.choice(all_provider_choices)
+    new_group.save()
+
+
+def create_locations():
+  faker = Faker()
+
+  for _ in range(20):
+    new_location = Location()
+    new_location.name = faker.city()
+    new_location.external_id = faker.random_int()
+    new_location.secret_code = faker.uuid4()
+    new_location.save()
