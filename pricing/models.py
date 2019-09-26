@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models.signals import m2m_changed
-from django.dispatch import receiver
 from encrypted_model_fields.fields import EncryptedCharField
 
 
@@ -28,13 +26,6 @@ class Country(models.Model):
   country_code = models.CharField(max_length=20)
 
   def __repr__(self): return "%s, country_code: %s" % (self.id, self.country_code)
-
-
-@receiver(m2m_changed, sender=Country.target_groups.through)
-def are_all_target_groups_root(sender, **kwargs):
-  for pk in kwargs["pk_set"]:
-    if kwargs["model"].objects.get(pk=pk).parent != None:
-      raise ValueError("All target groups for a country must be root")
 
 
 class LocationGroup(models.Model):

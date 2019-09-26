@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 
-
 class PricingConfig(AppConfig):
-    name = 'pricing'
+  name = 'pricing'
+
+  def ready(self):
+    import pricing.signals
