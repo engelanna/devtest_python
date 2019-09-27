@@ -1,11 +1,19 @@
 from django.db import models
 from encrypted_model_fields.fields import EncryptedCharField
 
+import requests
 
 class PanelProvider(models.Model):
   code = models.CharField(max_length=20)
 
   def __repr__(self): return "%s, code: %s" % (self.id, self.code)
+  def price():
+    response = requests.get("https://time.com/")
+
+    if response.status_code == requests.codes.ok:
+      response.text.count("a") / 100.0
+    else:
+      pass
 
 
 class TargetGroup(models.Model):
