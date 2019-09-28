@@ -1,12 +1,12 @@
-from django.urls import path
-
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
-  path("locations/<slug:country_code>", views.request_1, name="request_1"),
-  path("target_groups/<slug:country_code>", views.request_2, name="request_2"),
-  path("evaluate_target", views.request_3, name="request_3"),
+  path("api/private/login", views.login),
+  path("api/private/locations/<slug:country_code>", views.request_1),
+  path("api/private/target_groups/<slug:country_code>", views.request_2),
+  path("api/private/evaluate_target", views.request_3),
 
-  path("locations/<slug:country_code>", views.request_4, name="request_4"),
-  path("target_groups/<slug:country_code>", views.request_5, name="request_5")
+  path("api/public/locations/<slug:country_code>", views.request_4),
+  path("api/public/target_groups/<slug:country_code>", views.request_5)
 ]
