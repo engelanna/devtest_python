@@ -3,3 +3,4 @@ django-encrypted-model-fields
 djangorestframework
 faker
 requests
+lxml
