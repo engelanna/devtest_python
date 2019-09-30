@@ -24,16 +24,15 @@ class PanelProviderSerializer(serializers.Serializer):
         fields = ["price"]
 
     price = serializers.SerializerMethodField()
-    #is_project = serializers.BooleanField(source='is_project')
 
     def get_price(self, obj):
         return {
-          0: self.price_from_time_com_html_nodes,
-          1: self.price_from_time_com_character_a_count,
-          2: self.price_from_openlibrary_arrays
+          0: self.__price_from_time_com_html_nodes,
+          1: self.__price_from_time_com_character_a_count,
+          2: self.__price_from_openlibrary_arrays
         }[obj.id % 3]()
 
-    def price_from_time_com_html_nodes(self):
+    def __price_from_time_com_html_nodes(self):
         response = requests.get("https://time.com/")
 
         if response.status_code == requests.codes.ok:
@@ -42,13 +41,13 @@ class PanelProviderSerializer(serializers.Serializer):
             )
             return html_node_count / 100.0
 
-    def price_from_time_com_character_a_count(self):
+    def __price_from_time_com_character_a_count(self):
         response = requests.get("https://time.com/")
 
         if response.status_code == requests.codes.ok:
           return response.text.count("a") / 100.0
 
-    def price_from_openlibrary_arrays(self):
+    def __price_from_openlibrary_arrays(self):
         response = requests.get("http://openlibrary.org/search.json?q=the+lord+of+the+rings")
 
         if response.status_code == requests.codes.ok:

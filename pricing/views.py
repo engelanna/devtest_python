@@ -42,6 +42,9 @@ class LoginView(APIView):
 class PublicLocationsView(APIView):
     """
     Returns locations which belong to the selected country based on its current panel provider
+
+    Params:
+        country_code
     """
     def get(self, request, country_code):
         country = get_object_or_404(Country, country_code=country_code.upper())
@@ -54,7 +57,10 @@ class PublicLocationsView(APIView):
 @permission_classes([AllowAny])
 class PublicTargetGroupsView(APIView):
     """
-    Returns target groups which belong to the selected country based on it's current panel provider
+    Returns target groups which belong to the selected country based on its current panel provider
+
+    Params:
+        country_code
     """
     def get(self, request, country_code):
         country = get_object_or_404(Country, country_code=country_code.upper())
@@ -88,11 +94,11 @@ class PrivatePricingView(APIView):
     """
     Returns a price based on the panel provider used by a country
 
-    provided and valid:
-
-    :country_code
-    :target_group_id
-    :locations (an array of hashes which look like this { id: 123, panel_size: 200 })
+    Params:
+        country_code
+        target_group_id
+        locations
+            an array of hashes like this { id: 123, panel_size: 200 })
     """
     def post(self, request):
         self.__check_required_params(request)
