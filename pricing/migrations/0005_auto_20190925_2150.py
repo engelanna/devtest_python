@@ -7,15 +7,18 @@ from pricing.models import PanelProvider, Country, Location, LocationGroup, Targ
 import random
 
 
-def seed_the_models(_apps, _schema_editor):
-  panel_provider_ids = create_panel_providers()
+def seed_the_models(apps, _schema_editor):
+  get_model = lambda model_name: apps.get_model("pricing", model_name)
 
-  create_target_groups(panel_provider_ids)
+  panel_provider_ids = create_panel_providers(get_model("PanelProvider"))
 
-  country_ids = create_countries(panel_provider_ids)
+  create_target_groups(get_model("TargetGroup"), panel_provider_ids)
 
-  create_location_groups(panel_provider_ids, country_ids)
-  create_locations()
+  country_ids = create_countries(get_model("Country"), panel_provider_ids)
+
+  create_location_groups(get_model("LocationGroup"),
+    panel_provider_ids, country_ids)
+  create_locations(get_model("Location"))
 
 
 class Migration(migrations.Migration):
@@ -28,7 +31,7 @@ class Migration(migrations.Migration):
   ]
 
 
-def create_panel_providers():
+def create_panel_providers(PanelProvider):
   newly_inserted_ids = []
   faker = Faker()
 
@@ -41,12 +44,12 @@ def create_panel_providers():
   return newly_inserted_ids
 
 
-def create_target_groups(provider_ids):
-  root_group_ids = create_root_target_groups(provider_ids)
-  create_children_target_groups(root_group_ids, provider_ids)
+def create_target_groups(TargetGroup, provider_ids):
+  root_group_ids = create_root_target_groups(TargetGroup, provider_ids)
+  create_children_target_groups(TargetGroup, root_group_ids, provider_ids)
 
 
-def create_root_target_groups(all_provider_choices):
+def create_root_target_groups(TargetGroup, all_provider_choices):
   provider_choices_left = set(all_provider_choices)
   root_group_ids = []
   faker = Faker()
@@ -65,7 +68,7 @@ def create_root_target_groups(all_provider_choices):
   return root_group_ids
 
 
-def create_children_target_groups(root_group_ids, provider_choices):
+def create_children_target_groups(TargetGroup, root_group_ids, provider_choices):
   faker = Faker()
 
   for root_group in TargetGroup.objects.filter(id__in=root_group_ids):
@@ -81,7 +84,7 @@ def create_children_target_groups(root_group_ids, provider_choices):
       child_group.save()
 
 
-def create_countries(all_provider_choices):
+def create_countries(Country, all_provider_choices):
   remaining_providers = set(all_provider_choices)
   newly_inserted_ids = []
   faker = Faker()
@@ -97,7 +100,7 @@ def create_countries(all_provider_choices):
   return newly_inserted_ids
 
 
-def create_location_groups(all_provider_choices, country_ids):
+def create_location_groups(LocationGroup, all_provider_choices, country_ids):
   remaining_providers = set(all_provider_choices)
   faker = Faker()
 
@@ -110,7 +113,7 @@ def create_location_groups(all_provider_choices, country_ids):
     new_group.save()
 
 
-def create_locations():
+def create_locations(Location):
   faker = Faker()
 
   for _ in range(20):
