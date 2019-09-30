@@ -7,7 +7,7 @@ urlpatterns = [
     path("api/public/target_groups/<slug:country_code>",
         PublicTargetGroupsView.as_view(), name="target_groups"),
 
-    path("api/private/login", LoginView.as_view()),
+    path("api/private/login", LoginView.as_view(), name="api_login"),
 
     path("api/private/locations/<slug:country_code>", PrivateLocationsView.as_view()),
     path("api/private/target_groups/<slug:country_code>", PrivateTargetGroupsView.as_view()),

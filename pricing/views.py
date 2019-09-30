@@ -19,10 +19,11 @@ from .serializers import *
 
 @permission_classes([AllowAny])
 class LoginView(APIView):
-    """
-    Private API entry point
-    """
+
     def post(self, request):
+        """
+        Private API entry point
+        """
         username = request.data.get("username")
         password = request.data.get("password")
 
@@ -40,13 +41,14 @@ class LoginView(APIView):
 
 @permission_classes([AllowAny])
 class PublicLocationsView(APIView):
-    """
-    Returns locations which belong to the selected country based on its current panel provider
 
-    Params:
-        country_code
-    """
     def get(self, request, country_code):
+        """
+        Returns locations which belong to the selected country based on its current panel provider
+
+        Params:
+            country_code
+        """
         country = get_object_or_404(Country, country_code=country_code.upper())
         location_group_ids = [lg.id for lg in LocationGroup.objects.filter(panel_provider_id=country.panel_provider_id)]
         locations = Location.objects.filter(location_groups__in=location_group_ids)
@@ -56,13 +58,14 @@ class PublicLocationsView(APIView):
 
 @permission_classes([AllowAny])
 class PublicTargetGroupsView(APIView):
-    """
-    Returns target groups which belong to the selected country based on its current panel provider
 
-    Params:
-        country_code
-    """
     def get(self, request, country_code):
+        """
+        Returns target groups which belong to the selected country based on its current panel provider
+
+        Params:
+            country_code
+        """
         country = get_object_or_404(Country, country_code=country_code.upper())
         target_groups = TargetGroup.objects.filter(panel_provider_id=country.panel_provider_id)
 
@@ -75,6 +78,9 @@ class PublicTargetGroupsView(APIView):
 class PrivateLocationsView(APIView):
 
     def get(self, request, country_code):
+        """
+        See PublicLocationsView.get
+        """
         country = get_object_or_404(Country, country_code=country_code.upper())
 
         return redirect("locations", country_code)
@@ -84,6 +90,9 @@ class PrivateLocationsView(APIView):
 class PrivateTargetGroupsView(APIView):
 
     def get(self, request, country_code):
+        """
+        See PublicTargetGroupsView.get
+        """
         country = get_object_or_404(Country, country_code=country_code.upper())
 
         return redirect("target_groups", country_code)
@@ -91,16 +100,17 @@ class PrivateTargetGroupsView(APIView):
 
 @permission_classes([IsAuthenticated])
 class PrivatePricingView(APIView):
-    """
-    Returns a price based on the panel provider used by a country
 
-    Params:
-        country_code
-        target_group_id
-        locations
-            an array of hashes like this { id: 123, panel_size: 200 })
-    """
     def post(self, request):
+        """
+        Returns a price based on the panel provider used by a country
+
+        Params:
+            country_code
+            target_group_id
+            locations
+                an array of hashes like { id: 123, panel_size: 200 }
+        """
         self.__check_required_params(request)
 
         country = get_object_or_404(
