@@ -23,14 +23,14 @@ class PanelProviderSerializer(serializers.Serializer):
         model = PanelProvider
         fields = ["price"]
 
-    price = serializers.SerializerMethodField("price")
+    price = serializers.SerializerMethodField()
     #is_project = serializers.BooleanField(source='is_project')
 
-    def price(self, obj):
+    def get_price(self, obj):
         return {
-          0: price_from_time_com_html_nodes,
-          1: price_from_time_com_character_a_count,
-          2: price_from_openlibrary_arrays
+          0: self.price_from_time_com_html_nodes,
+          1: self.price_from_time_com_character_a_count,
+          2: self.price_from_openlibrary_arrays
         }[obj.id % 3]()
 
     def price_from_time_com_html_nodes(self):
@@ -52,14 +52,14 @@ class PanelProviderSerializer(serializers.Serializer):
         response = requests.get("http://openlibrary.org/search.json?q=the+lord+of+the+rings")
 
         if response.status_code == requests.codes.ok:
-            return __arrays_over_10_elements_count(response.json())
+            return self.__arrays_over_10_elements_count(response.json())
 
 
     def __arrays_over_10_elements_count(self, json, count=0):
-        for value in __values_list(json):
-            if __value_is_interesting(value):
+        for value in self.__values_list(json):
+            if self.__value_is_interesting(value):
                 count += 1 if len(value) >= 10 else 0
-                count = __arrays_over_10_elements_count(value, count)
+                count = self.__arrays_over_10_elements_count(value, count)
         return count
 
     def __values_list(self, json):

@@ -119,7 +119,6 @@ class PrivatePricingView(APIView):
 
         for location in json.loads(request.POST["locations"]):
             if not isinstance(location, dict):
-                import code; code.interact(local=dict(globals(), **locals()))
                 raise ValueError(
                     "Not a hash: %s, %s" % (type(location), location)
                 )
