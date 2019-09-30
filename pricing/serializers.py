@@ -5,27 +5,33 @@ import requests
 
 from .models import Country, PanelProvider, Country, Location, LocationGroup, TargetGroup
 
+
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = ["name"]
+
 
 class TargetGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = TargetGroup
         fields = ["name", "external_id"]
 
+
 class PanelProviderSerializer(serializers.Serializer):
+    class Meta:
+        model = PanelProvider
+        fields = ["price"]
+
     price = serializers.SerializerMethodField("price")
     #is_project = serializers.BooleanField(source='is_project')
 
-    def price(_self, obj):
+    def price(self, obj):
         return {
           0: price_from_time_com_html_nodes,
           1: price_from_time_com_character_a_count,
           2: price_from_openlibrary_arrays
         }[obj.id % 3]()
-
 
     def price_from_time_com_html_nodes(self):
         response = requests.get("https://time.com/")

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
@@ -11,6 +11,7 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 from rest_framework.views import APIView
+import json
 
 from .models import Country, Location, LocationGroup, TargetGroup
 from .serializers import *
@@ -64,6 +65,7 @@ class PublicTargetGroupsView(APIView):
         )
 
 
+@permission_classes([IsAuthenticated])
 class PrivateLocationsView(APIView):
 
     def get(self, request, country_code):
@@ -72,13 +74,59 @@ class PrivateLocationsView(APIView):
         return redirect("locations", country_code)
 
 
+@permission_classes([IsAuthenticated])
 class PrivateTargetGroupsView(APIView):
+
     def get(self, request, country_code):
         country = get_object_or_404(Country, country_code=country_code.upper())
 
         return redirect("target_groups", country_code)
 
 
+@permission_classes([IsAuthenticated])
 class PrivatePricingView(APIView):
-    def post(self, request, country_code):
-        country = get_object_or_404(Country, country_code=request.POST["country_code"])
+    """
+    Returns a price based on the panel provider used by a country
+
+    provided and valid:
+
+    :country_code
+    :target_group_id
+    :locations (an array of hashes which look like this { id: 123, panel_size: 200 })
+    """
+    def post(self, request):
+        self.__check_required_params(request)
+
+        country = get_object_or_404(
+            Country, country_code=request.POST["country_code"].upper()
+        )
+        target_group = get_object_or_404(
+            TargetGroup, id=request.POST["target_group_id"]
+        )
+        locations = self.__get_locations(request)
+
+        return Response(
+            PanelProviderSerializer(country.panel_provider).data
+        )
+
+    def __check_required_params(self, request):
+        for field in ["country_code", "target_group_id", "locations"]:
+                if not field in request.POST:
+                    raise KeyError("Required field missing: %s" % field)
+
+    def __get_locations(self, request):
+        locations = []
+
+        for location in json.loads(request.POST["locations"]):
+            if not isinstance(location, dict):
+                import code; code.interact(local=dict(globals(), **locals()))
+                raise ValueError(
+                    "Not a hash: %s, %s" % (type(location), location)
+                )
+
+            locations.append(
+                get_object_or_404(Location,
+                    id=location["id"],
+                    panel_size=location["panel_size"]))
+
+        return locations

@@ -44,9 +44,13 @@ class LocationGroup(models.Model):
 class Location(models.Model):
     location_groups = models.ManyToManyField(LocationGroup)
 
+    panel_size = models.IntegerField(default=0)
     external_id = models.IntegerField(default=None)
     name = models.CharField(max_length=100)
     secret_code = EncryptedCharField(max_length=100)
 
-    def __repr__(self): return "%s, name: %s" % (self.id, self.name)
+    def __repr__(self):
+        return "%s, name: %s, panel_size: %s" % (
+            self.id, self.name, self.panel_size
+        )
 
