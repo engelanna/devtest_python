@@ -6,8 +6,6 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
-from rest_framework.test import APIRequestFactory
-import json
 
 
 def create_user(username, password):
@@ -17,10 +15,13 @@ def create_user(username, password):
 class LoginViewTests(TestCase):
     def setUp(self):
         self.user = create_user("Duffy", "Duck")
+        self.factory = APIRequestFactory()
+        self.client = APIClient()
         self.client.login(username=self.user.username, password=self.user.password)
-        self.response = self.client.post(
-            "api_login",
-            { "username": self.user.username, "password": self.user.password },
+        self.request = self.factory.post(
+            "/api/private/login",
+            json.dumps({ "username": self.user.username, "password": self.user.password }),
+            content_type="application/json"
         )
 
     def test_logging_in(self):

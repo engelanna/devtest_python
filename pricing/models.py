@@ -7,7 +7,8 @@ import requests
 class PanelProvider(models.Model):
     code = models.CharField(max_length=20)
 
-    def __repr__(self): return "%s, code: %s" % (self.id, self.code)
+    def __repr__(self):
+        return "%s, code: %s" % (self.id, self.code)
 
 
 class TargetGroup(models.Model):
@@ -38,7 +39,8 @@ class LocationGroup(models.Model):
 
     name = models.CharField(max_length=100)
 
-    def __repr__(self): return "%s, name: %s" % (self.id, self.name)
+    def __repr__(self):
+        return "%s, name: %s" % (self.id, self.name)
 
 
 class Location(models.Model):
