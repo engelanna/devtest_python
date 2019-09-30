@@ -5,6 +5,16 @@ import requests
 
 from .models import Country, PanelProvider, Country, Location, LocationGroup, TargetGroup
 
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ["name"]
+
+class TargetGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TargetGroup
+        fields = ["name", "external_id"]
+
 class PanelProviderSerializer(serializers.Serializer):
     price = serializers.SerializerMethodField("price")
     #is_project = serializers.BooleanField(source='is_project')
@@ -15,6 +25,7 @@ class PanelProviderSerializer(serializers.Serializer):
           1: price_from_time_com_character_a_count,
           2: price_from_openlibrary_arrays
         }[obj.id % 3]()
+
 
     def price_from_time_com_html_nodes(self):
         response = requests.get("https://time.com/")
@@ -36,6 +47,7 @@ class PanelProviderSerializer(serializers.Serializer):
 
         if response.status_code == requests.codes.ok:
             return __arrays_over_10_elements_count(response.json())
+
 
     def __arrays_over_10_elements_count(self, json, count=0):
         for value in __values_list(json):
