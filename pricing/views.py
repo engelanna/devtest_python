@@ -22,7 +22,14 @@ class LoginView(APIView):
 
     def post(self, request):
         """
-        Private API entry point
+        Private API entry point.
+
+        JSON params:
+            {
+                "username": string,
+                "password": string
+            }
+
         """
         username = request.data.get("username")
         password = request.data.get("password")
@@ -47,7 +54,7 @@ class PublicLocationsView(APIView):
         Returns locations which belong to the selected country based on its current panel provider
 
         Params:
-            country_code
+            country_code:string
         """
         country = get_object_or_404(Country, country_code=country_code.upper())
         location_group_ids = [lg.id for lg in LocationGroup.objects.filter(panel_provider_id=country.panel_provider_id)]
@@ -64,7 +71,7 @@ class PublicTargetGroupsView(APIView):
         Returns target groups which belong to the selected country based on its current panel provider
 
         Params:
-            country_code
+            country_code:string
         """
         country = get_object_or_404(Country, country_code=country_code.upper())
         target_groups = TargetGroup.objects.filter(panel_provider_id=country.panel_provider_id)
@@ -106,10 +113,9 @@ class PrivatePricingView(APIView):
         Returns a price based on the panel provider used by a country
 
         Params:
-            country_code
-            target_group_id
-            locations
-                an array of hashes like { id: 123, panel_size: 200 }
+            country_code:string
+            target_group_id:integer
+            locations: an array of hashes like { id: 123, panel_size: 200 }
         """
         self.__check_required_params(request)
 
@@ -127,8 +133,8 @@ class PrivatePricingView(APIView):
 
     def __check_required_params(self, request):
         for field in ["country_code", "target_group_id", "locations"]:
-                if not field in request.POST:
-                    raise KeyError("Required field missing: %s" % field)
+            if not field in request.POST:
+                raise KeyError("Required field missing: %s" % field)
 
     def __get_locations(self, request):
         locations = []

@@ -9,17 +9,19 @@ from rest_framework.status import (
 
 
 def create_user(username, password):
-    return User.objects.create(username=username, password=password)
+    user = User.objects.create(username=username)
+    user.set_password(password)
+    user.save()
+    return user
 
 
 class LoginViewTests(TestCase):
     def setUp(self):
         self.user = create_user("Duffy", "Duck")
         self.response = self.client.post(
-            "/api/private/login",
-            { "username": self.user.username, "password": self.user.password },
+            reverse("api_login"),
+            { "username": self.user.username, "password": self.user.password }
         )
 
     def test_logging_in(self):
-        # import ipdb; ipdb.set_trace()
         self.assertEqual(self.response.status_code, HTTP_200_OK)
