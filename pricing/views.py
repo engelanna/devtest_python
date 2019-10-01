@@ -106,7 +106,7 @@ class PrivateTargetGroupsView(APIView):
 
 
 @permission_classes([IsAuthenticated])
-class PrivatePricingView(APIView):
+class PrivateGetPriceView(APIView):
 
     def post(self, request):
         """

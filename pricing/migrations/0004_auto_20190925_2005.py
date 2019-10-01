@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pricing', '0003_auto_20190925_1839'),
+        ('panel_provider_pricing', '0003_auto_20190925_1839'),
     ]
 
     operations = [

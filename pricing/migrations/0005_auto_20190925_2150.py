@@ -2,13 +2,13 @@
 
 from django.db import migrations
 from faker import Faker
-from pricing.models import PanelProvider, Country, Location, LocationGroup, TargetGroup
+from panel_provider_pricing.models import PanelProvider, Country, Location, LocationGroup, TargetGroup
 
 import random
 
 
 def seed_the_models(apps, _schema_editor):
-  get_model = lambda model_name: apps.get_model("pricing", model_name)
+  get_model = lambda model_name: apps.get_model("panel_provider_pricing", model_name)
 
   panel_provider_ids = create_panel_providers(get_model("PanelProvider"))
 
@@ -23,7 +23,7 @@ def seed_the_models(apps, _schema_editor):
 
 class Migration(migrations.Migration):
   dependencies = [
-    ("pricing", "0004_auto_20190925_2005"),
+    ("panel_provider_pricing", "0004_auto_20190925_2005"),
   ]
 
   operations = [

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "pricing.apps.PricingConfig",
+    "panel_provider_pricing.apps.PanelProviderPricingConfig",
     "django_extensions",
     "encrypted_model_fields",
     "faker",

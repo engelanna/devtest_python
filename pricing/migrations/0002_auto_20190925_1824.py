@@ -7,7 +7,7 @@ import encrypted_model_fields.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pricing', '0001_initial'),
+        ('panel_provider_pricing', '0001_initial'),
     ]
 
     operations = [

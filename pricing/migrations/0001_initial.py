@@ -33,8 +33,8 @@ class Migration(migrations.Migration):
                 ('external_id', models.IntegerField(default=None)),
                 ('name', models.CharField(max_length=100)),
                 ('secret_code', models.CharField(max_length=100)),
-                ('panel_provider_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='pricing.PanelProvider')),
-                ('parent_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='pricing.TargetGroup')),
+                ('panel_provider_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='panel_provider_pricing.PanelProvider')),
+                ('parent_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='panel_provider_pricing.TargetGroup')),
             ],
         ),
         migrations.CreateModel(
@@ -42,8 +42,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('country_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='pricing.Country')),
-                ('panel_provider_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='pricing.PanelProvider')),
+                ('country_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='panel_provider_pricing.Country')),
+                ('panel_provider_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='panel_provider_pricing.PanelProvider')),
             ],
         ),
         migrations.CreateModel(
@@ -53,17 +53,17 @@ class Migration(migrations.Migration):
                 ('external_id', models.IntegerField(default=None)),
                 ('name', models.CharField(max_length=100)),
                 ('secret_code', models.CharField(max_length=100)),
-                ('location_groups', models.ManyToManyField(to='pricing.LocationGroup')),
+                ('location_groups', models.ManyToManyField(to='panel_provider_pricing.LocationGroup')),
             ],
         ),
         migrations.AddField(
             model_name='country',
             name='panel_provider_id',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='pricing.PanelProvider'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='panel_provider_pricing.PanelProvider'),
         ),
         migrations.AddField(
             model_name='country',
             name='target_groups',
-            field=models.ManyToManyField(to='pricing.TargetGroup'),
+            field=models.ManyToManyField(to='panel_provider_pricing.TargetGroup'),
         ),
     ]

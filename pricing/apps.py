@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
-class PricingConfig(AppConfig):
-  name = 'pricing'
+class PanelProviderPricingConfig(AppConfig):
+  name = 'panel_provider_pricing'
 
   def ready(self):
-    import pricing.signals
+    import panel_provider_pricing.signals
