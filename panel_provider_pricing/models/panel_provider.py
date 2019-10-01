@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class PanelProvider(models.Model):
     code = models.CharField(max_length=20)
 
