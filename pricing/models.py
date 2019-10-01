@@ -7,6 +7,9 @@ import requests
 class PanelProvider(models.Model):
     code = models.CharField(max_length=20)
 
+    class Meta:
+        db_table = "panel_providers"
+
     def __repr__(self):
         return "%s, code: %s" % (self.id, self.code)
 
@@ -19,6 +22,9 @@ class TargetGroup(models.Model):
     name = models.CharField(max_length=100)
     secret_code = EncryptedCharField(max_length=100)
 
+    class Meta:
+        db_table = "target_groups"
+
     def __repr__(self):
         return "%s, name: %s, external_id: %s" % (self.id, self.name, self.external_id)
 
@@ -29,6 +35,9 @@ class Country(models.Model):
 
     country_code = models.CharField(max_length=20)
 
+    class Meta:
+        db_table = "countries"
+
     def __repr__(self):
         return "%s, country_code: %s" % (self.id, self.country_code)
 
@@ -38,6 +47,9 @@ class LocationGroup(models.Model):
     panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
 
     name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = "location_groups"
 
     def __repr__(self):
         return "%s, name: %s" % (self.id, self.name)
@@ -50,6 +62,9 @@ class Location(models.Model):
     external_id = models.IntegerField(default=None)
     name = models.CharField(max_length=100)
     secret_code = EncryptedCharField(max_length=100)
+
+    class Meta:
+        db_table = "locations"
 
     def __repr__(self):
         return "%s, name: %s, panel_size: %s" % (
