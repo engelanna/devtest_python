@@ -16,16 +16,8 @@ from cryptography.fernet import Fernet as frt
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "g&1o*j=9#c7c3a3u@*85nb5jahlo!is5*v6z!&+noiy#6urp5*"
 FIELD_ENCRYPTION_KEY = b"_BY91OK--AkcDwZCDy46owitesPoBT5kdMiLPQavU5M="
 
-# SECURITY WARNING: don"t run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -39,12 +31,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "panel_provider_pricing.apps.PanelProviderPricingConfig",
     "django_extensions",
     "encrypted_model_fields",
-    "faker",
+    "panel_provider_pricing",
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -76,17 +67,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db", "db.sqlite3"),
-    }
-}
 
 
 # Password validation
@@ -139,3 +119,7 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.JSONRenderer",
     ]
 }
+
+
+if os.getenv("DJANGO_DEVELOPMENT"):
+    from .settings_dev import *
