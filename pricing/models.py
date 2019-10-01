@@ -11,7 +11,7 @@ class PanelProvider(models.Model):
         db_table = "panel_providers"
 
     def __repr__(self):
-        return "%s, code: %s" % (self.id, self.code)
+        return F"{self.id}, code: {self.code}"
 
 
 class TargetGroup(models.Model):
@@ -26,7 +26,7 @@ class TargetGroup(models.Model):
         db_table = "target_groups"
 
     def __repr__(self):
-        return "%s, name: %s, external_id: %s" % (self.id, self.name, self.external_id)
+        return F"{self.id}, name: {self.name}, external_id: {self.external_id}"
 
 
 class Country(models.Model):
@@ -39,7 +39,7 @@ class Country(models.Model):
         db_table = "countries"
 
     def __repr__(self):
-        return "%s, country_code: %s" % (self.id, self.country_code)
+        return F"{self.id}, country_code: {self.country_code}"
 
 
 class LocationGroup(models.Model):
@@ -52,7 +52,7 @@ class LocationGroup(models.Model):
         db_table = "location_groups"
 
     def __repr__(self):
-        return "%s, name: %s" % (self.id, self.name)
+        return F"{self.id}, name: {self.name}"
 
 
 class Location(models.Model):
@@ -67,7 +67,5 @@ class Location(models.Model):
         db_table = "locations"
 
     def __repr__(self):
-        return "%s, name: %s, panel_size: %s" % (
-            self.id, self.name, self.panel_size
-        )
+        return F"{self.id}, name: {self.name}, panel_size: {self.panel_size}"
 

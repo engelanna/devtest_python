@@ -134,7 +134,7 @@ class PrivatePricingView(APIView):
     def __check_required_params(self, request):
         for field in ["country_code", "target_group_id", "locations"]:
             if not field in request.POST:
-                raise KeyError("Required field missing: %s" % field)
+                raise KeyError(F"Required field missing: {field}")
 
     def __get_locations(self, request):
         locations = []
@@ -142,7 +142,7 @@ class PrivatePricingView(APIView):
         for location in json.loads(request.POST["locations"]):
             if not isinstance(location, dict):
                 raise ValueError(
-                    "Not a hash: %s, %s" % (type(location), location)
+                    F"Not a hash: {type(location)}, {location}"
                 )
 
             locations.append(
