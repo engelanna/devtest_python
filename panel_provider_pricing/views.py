@@ -73,6 +73,9 @@ class PublicTargetGroupsView(APIView):
         """
         Returns a JSON list of target groups which belong to the selected country (based on its current panel provider)
 
+        Authentication:
+            JSON web token
+
         Params:
             country_code : string
         """
@@ -90,7 +93,13 @@ class PrivateLocationsView(APIView):
 
     def get(self, request, country_code):
         """
-        See PublicLocationsView.get
+        Returns a JSON list of locations which belong to the selected country (based on its current panel provider)
+
+        Authentication:
+            JSON web token
+
+        Params:
+            country_code : str
         """
 
         country = get_object_or_404(Country, country_code=country_code.upper())
@@ -103,7 +112,13 @@ class PrivateTargetGroupsView(APIView):
 
     def get(self, request, country_code):
         """
-        See PublicTargetGroupsView.get
+        Returns a JSON list of target groups which belong to the selected country (based on its current panel provider)
+
+        Authentication:
+            JSON web token
+
+        Params:
+            country_code : string
         """
 
         country = get_object_or_404(Country, country_code=country_code.upper())
@@ -130,7 +145,7 @@ class PrivateGetPriceView(APIView):
             HTTP connections to external sites
         """
 
-        self.__check_required_params(request)
+        self._check_required_params(request)
 
         country = get_object_or_404(
             Country, country_code=request.POST["country_code"].upper()
@@ -138,18 +153,18 @@ class PrivateGetPriceView(APIView):
         target_group = get_object_or_404(
             TargetGroup, id=request.POST["target_group_id"]
         )
-        locations = self.__get_locations(request)
+        locations = self._get_locations(request)
 
         return Response(
             PanelProviderSerializer(country.panel_provider).data
         )
 
-    def __check_required_params(self, request):
+    def _check_required_params(self, request):
         for field in ["country_code", "target_group_id", "locations"]:
             if not field in request.POST:
                 raise KeyError(F"Required field missing: {field}")
 
-    def __get_locations(self, request):
+    def _get_locations(self, request):
         locations = []
 
         for location in json.loads(request.POST["locations"]):

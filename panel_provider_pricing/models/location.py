@@ -1,7 +1,7 @@
 from django.db import models
 from encrypted_model_fields.fields import EncryptedCharField
 
-from panel_provider_pricing.models import LocationGroup
+from .location_group import LocationGroup
 
 
 class Location(models.Model):

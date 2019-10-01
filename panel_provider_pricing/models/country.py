@@ -1,8 +1,9 @@
 from django.db import models
+from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
-from models.signals import m2m_changed
 
-from panel_provider_pricing.models import PanelProvider, TargetGroup
+from .panel_provider import PanelProvider
+from .target_group import TargetGroup
 
 
 class Country(models.Model):

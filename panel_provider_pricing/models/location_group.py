@@ -1,13 +1,14 @@
 from django.db import models
 
-from panel_provider_pricing.models import Country, PanelProvider
+from .country import Country
+from .panel_provider import PanelProvider
 
 
 class LocationGroup(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
 
-    name = mdels.CharField(max_length=100)
+    name = models.CharField(max_length=100)
 
     class Meta:
         db_table = "location_groups"

@@ -1,11 +1,11 @@
 from django.db import models
 from encrypted_model_fields.fields import EncryptedCharField
 
-from panel_provider_pricing.models import PanelProvider
+from .panel_provider import PanelProvider
 
 
 class TargetGroup(models.Model):
-    parent = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)
+    parent = models.ForeignKey("self", null=True, on_delete=models.SET_NULL)
     panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
 
     external_id = models.IntegerField(default=None)
