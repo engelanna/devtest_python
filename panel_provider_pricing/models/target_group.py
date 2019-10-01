@@ -1,6 +1,8 @@
 from django.db import models
-from panel_provider_pricing.models import PanelProvider
 from encrypted_model_fields.fields import EncryptedCharField
+
+from panel_provider_pricing.models import PanelProvider
+
 
 class TargetGroup(models.Model):
     parent = models.ForeignKey('self', null=True, on_delete=models.SET_NULL)

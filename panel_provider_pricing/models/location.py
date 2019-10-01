@@ -1,6 +1,8 @@
 from django.db import models
-from panel_provider_pricing.models import LocationGroup
 from encrypted_model_fields.fields import EncryptedCharField
+
+from panel_provider_pricing.models import LocationGroup
+
 
 class Location(models.Model):
     location_groups = models.ManyToManyField(LocationGroup)
