@@ -120,6 +120,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, "panel_provider_pricing", "migrations", "seeding")
+]
+
 
 if os.getenv("DJANGO_DEVELOPMENT"):
     from .settings_dev import *

@@ -1,0 +1,1010 @@
+[
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "auth",
+      "model": "user"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "panel_provider_pricing",
+      "model": "country"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "panel_provider_pricing",
+      "model": "panelprovider"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "panel_provider_pricing",
+      "model": "targetgroup"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "panel_provider_pricing",
+      "model": "locationgroup"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "panel_provider_pricing",
+      "model": "location"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "authtoken",
+      "model": "token"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.panelprovider",
+    "pk": 1,
+    "fields": {
+      "code": "synthesize innovative relationships"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.panelprovider",
+    "pk": 2,
+    "fields": {
+      "code": "disintermediate next-generation architectures"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.panelprovider",
+    "pk": 3,
+    "fields": {
+      "code": "iterate granular interfaces"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 1,
+    "fields": {
+      "parent": null,
+      "panel_provider": 1,
+      "external_id": 6889,
+      "name": "size-later-role",
+      "secret_code": "ff12d929-5667-4373-8ddd-5818607447da"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 2,
+    "fields": {
+      "parent": null,
+      "panel_provider": 2,
+      "external_id": 9369,
+      "name": "attorney-wish",
+      "secret_code": "fc0c2712-f079-4087-9abf-25335118f09e"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 3,
+    "fields": {
+      "parent": null,
+      "panel_provider": 3,
+      "external_id": 52,
+      "name": "try-teach-begin",
+      "secret_code": "0e43589f-8e19-4ad3-af68-7e50dbb79f21"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 4,
+    "fields": {
+      "parent": null,
+      "panel_provider": 3,
+      "external_id": 3029,
+      "name": "interview-thank",
+      "secret_code": "ffc57d50-b176-43fe-b897-df288e9bf90a"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 5,
+    "fields": {
+      "parent": 1,
+      "panel_provider": 2,
+      "external_id": 6519,
+      "name": "your-impact-in",
+      "secret_code": "ae440f6b-9f6e-4151-8de0-7086dd79d352"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 6,
+    "fields": {
+      "parent": 1,
+      "panel_provider": 2,
+      "external_id": 8992,
+      "name": "trade-language",
+      "secret_code": "d81af7d2-1e5a-4917-ad81-73293b98b63c"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 7,
+    "fields": {
+      "parent": 1,
+      "panel_provider": 3,
+      "external_id": 3057,
+      "name": "wrong-behind-send",
+      "secret_code": "59284633-a189-4c55-a6d5-814484fd2e39"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 8,
+    "fields": {
+      "parent": 2,
+      "panel_provider": 2,
+      "external_id": 1913,
+      "name": "build-show-manage",
+      "secret_code": "0b1456b4-d478-4881-bb7a-7e24d35a17d9"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 9,
+    "fields": {
+      "parent": 2,
+      "panel_provider": 1,
+      "external_id": 8384,
+      "name": "fall-fall-operation",
+      "secret_code": "9dfd37c7-1c47-4506-ba1e-8ab599c61fe4"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 10,
+    "fields": {
+      "parent": 2,
+      "panel_provider": 2,
+      "external_id": 4809,
+      "name": "citizen-put-letter",
+      "secret_code": "74c7c644-5434-4b6a-9f9f-a57805be8f96"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 11,
+    "fields": {
+      "parent": 3,
+      "panel_provider": 1,
+      "external_id": 1724,
+      "name": "him-effort-day",
+      "secret_code": "928cf7c1-47ed-47aa-93d0-2f7b3370c1b2"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 12,
+    "fields": {
+      "parent": 3,
+      "panel_provider": 1,
+      "external_id": 5093,
+      "name": "effort-west",
+      "secret_code": "0bdc39e5-ebd2-48ff-8951-1617781da48b"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 13,
+    "fields": {
+      "parent": 3,
+      "panel_provider": 1,
+      "external_id": 4012,
+      "name": "unit-significant",
+      "secret_code": "93a8c596-2651-447c-b694-fbcf33fdf376"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 14,
+    "fields": {
+      "parent": 4,
+      "panel_provider": 1,
+      "external_id": 7452,
+      "name": "big-theory-expect",
+      "secret_code": "3aa4189c-1b1c-4028-9c07-12b918746048"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 15,
+    "fields": {
+      "parent": 4,
+      "panel_provider": 2,
+      "external_id": 8011,
+      "name": "girl-boy-detail-art",
+      "secret_code": "39023685-4081-4ad3-82c2-0dbed67c4753"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.targetgroup",
+    "pk": 16,
+    "fields": {
+      "parent": 4,
+      "panel_provider": 1,
+      "external_id": 8860,
+      "name": "with-yourself-price",
+      "secret_code": "dcd1ef08-2e45-4d59-9704-1b3601ad9041"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.country",
+    "pk": 1,
+    "fields": {
+      "panel_provider": 1,
+      "country_code": "PA",
+      "target_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.country",
+    "pk": 2,
+    "fields": {
+      "panel_provider": 2,
+      "country_code": "NZ",
+      "target_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.country",
+    "pk": 3,
+    "fields": {
+      "panel_provider": 3,
+      "country_code": "NO",
+      "target_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.locationgroup",
+    "pk": 1,
+    "fields": {
+      "country": 1,
+      "panel_provider": 1,
+      "name": "Sri Lanka"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.locationgroup",
+    "pk": 2,
+    "fields": {
+      "country": 2,
+      "panel_provider": 2,
+      "name": "Haiti"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.locationgroup",
+    "pk": 3,
+    "fields": {
+      "country": 1,
+      "panel_provider": 3,
+      "name": "Hong Kong"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.locationgroup",
+    "pk": 4,
+    "fields": {
+      "country": 2,
+      "panel_provider": 3,
+      "name": "Denmark"
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 1,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 5778,
+      "name": "Wagnerland",
+      "secret_code": "9e6741ab-01c4-44ab-b1ad-b54b363d5e3d",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 2,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 3102,
+      "name": "Stevenbury",
+      "secret_code": "9bd8741b-3fbf-49a0-8574-a1df2ac4dace",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 3,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 8671,
+      "name": "New Jennifer",
+      "secret_code": "63815fb1-f930-45e9-8e6b-017e6c483eea",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 4,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 8669,
+      "name": "Atkinsonbury",
+      "secret_code": "7450114c-dc59-45ce-b854-b5cee8753d2d",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 5,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 2412,
+      "name": "South Michelle",
+      "secret_code": "30474602-0197-43c6-8f33-be87f5b9c10b",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 6,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 4478,
+      "name": "Suzanneberg",
+      "secret_code": "e9496096-54d3-44bf-a8d3-2295f175f572",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 7,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 5241,
+      "name": "Javierfurt",
+      "secret_code": "caaece15-f555-403e-9b9a-1adc5ac5e862",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 8,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 4718,
+      "name": "Yuside",
+      "secret_code": "27697152-8848-444f-9d87-db719ef32506",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 9,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 2062,
+      "name": "Frazierchester",
+      "secret_code": "115a0a20-93c6-42ce-b2eb-d920d8704f8a",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 10,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 5865,
+      "name": "Lake Bethport",
+      "secret_code": "9ec712b4-5789-400a-9f31-f399dd9c1d47",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 11,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 3631,
+      "name": "Lake Johnshire",
+      "secret_code": "9ec3521b-0964-43fc-9e47-496c4a16aca4",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 12,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 1115,
+      "name": "Greenstad",
+      "secret_code": "88dee5e9-8a71-4f4b-bd2c-ea4a05e1155e",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 13,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 9633,
+      "name": "Davisport",
+      "secret_code": "c4f7c10f-fa7c-45dc-9bd7-aa26c51a31bc",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 14,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 3156,
+      "name": "Philipside",
+      "secret_code": "f2895ec1-eed0-4f0c-8fdd-db2ab64b430d",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 15,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 6668,
+      "name": "Port Brandy",
+      "secret_code": "f2e31c6a-cd32-41c3-ada8-f9b7b344278c",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 16,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 6487,
+      "name": "Kennethshire",
+      "secret_code": "bcd04c4f-dbd8-49e4-87e6-2f4cde9643a6",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 17,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 6433,
+      "name": "South Elizabeth",
+      "secret_code": "4b8f2b6f-aa84-41c8-bb45-823c22b19186",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 18,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 588,
+      "name": "South Jefferyville",
+      "secret_code": "e8e3bce1-1525-4c02-84e7-1405da97400e",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 19,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 623,
+      "name": "Lake Carl",
+      "secret_code": "8178f684-7381-4422-9bd0-8c8ee2637dc9",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "panel_provider_pricing.location",
+    "pk": 20,
+    "fields": {
+      "panel_size": 0,
+      "external_id": 1313,
+      "name": "Michaelshire",
+      "secret_code": "b7006ce3-f6ec-420e-b7ed-0812ef3ea3ad",
+      "location_groups": []
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 4,
+      "codename": "add_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 4,
+      "codename": "change_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 4,
+      "codename": "delete_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 4,
+      "codename": "view_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 5,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 5,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 5,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 5,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 6,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 6,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 6,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 6,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add country",
+      "content_type": 7,
+      "codename": "add_country"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change country",
+      "content_type": 7,
+      "codename": "change_country"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete country",
+      "content_type": 7,
+      "codename": "delete_country"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view country",
+      "content_type": 7,
+      "codename": "view_country"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add panel provider",
+      "content_type": 8,
+      "codename": "add_panelprovider"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change panel provider",
+      "content_type": 8,
+      "codename": "change_panelprovider"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete panel provider",
+      "content_type": 8,
+      "codename": "delete_panelprovider"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view panel provider",
+      "content_type": 8,
+      "codename": "view_panelprovider"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add target group",
+      "content_type": 9,
+      "codename": "add_targetgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change target group",
+      "content_type": 9,
+      "codename": "change_targetgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete target group",
+      "content_type": 9,
+      "codename": "delete_targetgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view target group",
+      "content_type": 9,
+      "codename": "view_targetgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add location group",
+      "content_type": 10,
+      "codename": "add_locationgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change location group",
+      "content_type": 10,
+      "codename": "change_locationgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete location group",
+      "content_type": 10,
+      "codename": "delete_locationgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view location group",
+      "content_type": 10,
+      "codename": "view_locationgroup"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add location",
+      "content_type": 11,
+      "codename": "add_location"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change location",
+      "content_type": 11,
+      "codename": "change_location"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete location",
+      "content_type": 11,
+      "codename": "delete_location"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view location",
+      "content_type": 11,
+      "codename": "view_location"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add Token",
+      "content_type": 12,
+      "codename": "add_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change Token",
+      "content_type": 12,
+      "codename": "change_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete Token",
+      "content_type": 12,
+      "codename": "delete_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view Token",
+      "content_type": 12,
+      "codename": "view_token"
+    }
+  }
+]
