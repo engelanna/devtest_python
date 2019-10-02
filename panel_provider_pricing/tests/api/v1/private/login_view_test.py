@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse, resolve
 from rest_framework.status import (
@@ -7,7 +6,7 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-from .factories import UserFactory
+from panel_provider_pricing.tests.factories import UserFactory
 
 
 class LoginViewTest(TestCase):
