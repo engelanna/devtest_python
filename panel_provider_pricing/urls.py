@@ -11,5 +11,5 @@ urlpatterns = [
 
     path("private/locations/<slug:country_code>", PrivateLocationsView.as_view()),
     path("private/target_groups/<slug:country_code>", PrivateTargetGroupsView.as_view()),
-    path("private/evaluate_target", PrivateAPIView.as_view()),
+    path("private/evaluate_target", PrivateGetPriceView.as_view()),
 ]
