@@ -7,19 +7,14 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-
-def create_user(username, password):
-    user = User.objects.create(username=username)
-    user.set_password(password)
-    user.save()
-    return user
+from .factories import UserFactory
 
 
-class LoginViewTests(TestCase):
+class LoginViewTest(TestCase):
     def setUp(self):
-        self.user = create_user("Duffy", "Duck")
+        self.user = UserFactory.create(username="Duffy", password="Duck")
         self.response = self.client.post(
-            reverse("api_login"),
+            reverse("api_v1_private_login"),
             { "username": self.user.username, "password": self.user.password }
         )
 

@@ -1,20 +1,20 @@
 from faker import Faker
 
-from .models import PanelProvider as DefaultModel
+from panel_provider_pricing.models import PanelProvider
 
 
 class PanelProviderFactory():
 
-    @staticmethod
-    def create(panel_provider_model=DefaultModel):
-        new_provider = build(panel_provider_model)
+    @classmethod
+    def create(cls):
+        new_provider = cls.build()
         new_provider.save()
 
         return new_provider
 
-    @staticmethod
-    def build(panel_provider_model=DefaultModel):
-        new_provider = panel_provider_model()
+    @classmethod
+    def build(cls):
+        new_provider = PanelProvider()
         new_provider.code = Faker().bs()
 
         return new_provider
