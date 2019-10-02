@@ -16,4 +16,4 @@ class TargetGroup(models.Model):
         db_table = "target_groups"
 
     def __repr__(self):
-        return F"{self.id}, name: {self.name}, external_id: {self.external_id}"
+        return f"{self.id}, name: {self.name}, external_id: {self.external_id}"

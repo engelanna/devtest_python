@@ -16,7 +16,7 @@ class Country(models.Model):
         db_table = "countries"
 
     def __repr__(self):
-        return F"{self.id}, country_code: {self.country_code}"
+        return f"{self.id}, country_code: {self.country_code}"
 
 
 @receiver(m2m_changed, sender=Country.target_groups.through)

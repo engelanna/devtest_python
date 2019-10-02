@@ -16,5 +16,5 @@ class Location(models.Model):
         db_table = "locations"
 
     def __repr__(self):
-        return F"{self.id}, name: {self.name}, panel_size: {self.panel_size}"
+        return f"{self.id}, name: {self.name}, panel_size: {self.panel_size}"
 

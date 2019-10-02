@@ -14,5 +14,5 @@ class LocationGroup(models.Model):
         db_table = "location_groups"
 
     def __repr__(self):
-        return F"{self.id}, name: {self.name}"
+        return f"{self.id}, name: {self.name}"
 

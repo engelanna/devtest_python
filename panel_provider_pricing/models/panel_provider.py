@@ -8,4 +8,4 @@ class PanelProvider(models.Model):
         db_table = "panel_providers"
 
     def __repr__(self):
-        return F"{self.id}, code: {self.code}"
+        return f"{self.id}, code: {self.code}"

@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 from panel_provider_pricing.models import Country
-from panel_provider_pricing.serializers import PanelProviderSerializer
+from panel_provider_pricing.models.serializers import PanelProviderSerializer
 
 
 @permission_classes([IsAuthenticated])
@@ -46,7 +46,7 @@ class GetPriceView(APIView):
     def _check_required_params(self, request):
         for field in ["country_code", "target_group_id", "locations"]:
             if not field in request.POST:
-                raise KeyError(F"Required field missing: {field}")
+                raise KeyError(f"Required field missing: {field}")
 
     def _get_locations(self, request):
         locations = []
@@ -54,7 +54,7 @@ class GetPriceView(APIView):
         for location in json.loads(request.POST["locations"]):
             if not isinstance(location, dict):
                 raise ValueError(
-                    F"Not a hash: {type(location)}, {location}"
+                    f"Not a hash: {type(location)}, {location}"
                 )
 
             locations.append(

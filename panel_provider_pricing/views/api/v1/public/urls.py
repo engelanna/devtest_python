@@ -10,7 +10,7 @@ urlpatterns = [
         name="api_v1_public_locations"
     ),
     path(
-        "locations/<slug:country_code>/", TargetGroupsView.as_view(),
+        "target_groups/<slug:country_code>/", TargetGroupsView.as_view(),
         name="api_v1_public_target_groups"
     ),
 ]
