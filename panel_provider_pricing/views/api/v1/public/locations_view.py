@@ -1,9 +1,8 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.decorators import permission_classes
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
 from panel_provider_pricing.models.serializers import LocationSerializer
 from panel_provider_pricing.queries import LocationsQuery
@@ -11,7 +10,7 @@ from panel_provider_pricing.services.validations.location import LocationParamsV
 
 
 @permission_classes([AllowAny])
-class LocationsView(APIView):
+class LocationsView(GenericAPIView):
     serializer_class = LocationSerializer
 
     def get(self, request, country_code):
@@ -23,7 +22,7 @@ class LocationsView(APIView):
         """
 
         params = self._location_params(country_code)
-        params_validation = LocationParamsValidation.new(params)
+        params_validation = LocationParamsValidation(params)
 
         response = None
 
@@ -39,9 +38,9 @@ class LocationsView(APIView):
     def _location_params(self, country_code):
         return { "country_code": country_code }
 
-    def _serialize_ok_reponse(self, locations):
+    def _serialize_ok_response(self, locations):
         return Response(
-            get_serializer(locations, many=True).data,
+            self.get_serializer(locations, many=True).data,
             status=HTTP_200_OK)
 
     def _bad_request_response(self, failed_validation):

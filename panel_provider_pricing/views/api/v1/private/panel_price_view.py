@@ -1,5 +1,7 @@
 from rest_framework.decorators import permission_classes
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
@@ -10,7 +12,7 @@ from panel_provider_pricing.services.validations.panel_price import PanelPricePa
 
 
 @permission_classes([IsAuthenticated])
-class PanelPriceView(APIView):
+class PanelPriceView(GenericAPIView):
     serializer_class = PanelProviderSerializer
 
     def post(self, request):
@@ -23,14 +25,14 @@ class PanelPriceView(APIView):
         Params:
             country_code : string
             target_group_id : integer
-            locations :  an array of hashes like { id: 123, panel_size: 200 }
+            locations : array of hashes like { "id": 123, "panel_size": 200 }
 
         Side effect:
             HTTP connections to external sites
         """
 
         params = self._panel_price_params(request)
-        params_validation = PanelPriceParamsValidation.new(params)
+        params_validation = PanelPriceParamsValidation(params)
 
         response = None
 
@@ -47,9 +49,9 @@ class PanelPriceView(APIView):
         post_data = request.POST
 
         return {
-            country_code: post_data["country_code"].upper(),
-            target_group_id: post_data["target_group_id"],
-            locations: post_data["locations"]
+            "country_code": post_data["country_code"].upper(),
+            "target_group_id": post_data["target_group_id"],
+            "locations": post_data["locations"]
         }
 
     def _bad_request_response(self, params_validation):

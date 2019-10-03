@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from panel_provider_pricing.models import PanelProvider
+from panel_provider_pricing.services.calculations.pricing_strategies import ArrayCount, CharacterCount, HTMLNodeCount
 
 
 class PanelProviderSerializer(serializers.Serializer):
@@ -13,4 +14,6 @@ class PanelProviderSerializer(serializers.Serializer):
 
 
     def get_price(self, panel_provider):
-        return globals()[panel_provider.price_calculation_strategy]
+        return globals()[
+            panel_provider.price_calculation_strategy
+        ]().execute()

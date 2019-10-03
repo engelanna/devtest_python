@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import permission_classes
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -10,7 +11,7 @@ from panel_provider_pricing.services.validations.target_group import TargetGroup
 
 
 @permission_classes([AllowAny])
-class TargetGroupsView(APIView):
+class TargetGroupsView(GenericAPIView):
     serializer_class = TargetGroupSerializer
 
     def get(self, request, country_code):
@@ -25,7 +26,7 @@ class TargetGroupsView(APIView):
         """
 
         params = self._target_group_params(country_code)
-        params_validation = TargetGroupParamsValidation.new(params)
+        params_validation = TargetGroupParamsValidation(params)
 
         response = None
 
@@ -41,9 +42,9 @@ class TargetGroupsView(APIView):
     def _target_group_params(self, country_code):
         return { "country_code": country_code }
 
-    def _serialize_ok_reponse(self, target_groups):
+    def _serialize_ok_response(self, target_groups):
         return Response(
-            get_serializer(target_groups, many=True).data,
+            self.get_serializer(target_groups, many=True).data,
             status=HTTP_200_OK)
 
     def _bad_request_response(self, failed_validation):

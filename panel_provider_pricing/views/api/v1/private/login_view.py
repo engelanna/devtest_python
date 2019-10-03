@@ -59,7 +59,7 @@ class LoginView(APIView):
 
         return response
 
-    def _authentication_successful_response(token):
+    def _authentication_successful_response(self, token):
         return Response({ "token": token.key },
             status=HTTP_200_OK)
 

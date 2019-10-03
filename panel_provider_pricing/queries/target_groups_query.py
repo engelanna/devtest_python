@@ -1,4 +1,7 @@
+from django.shortcuts import get_object_or_404
+
 from panel_provider_pricing.models import Country, TargetGroup
+
 
 class TargetGroupsQuery():
     def __init__(self, panel_params):

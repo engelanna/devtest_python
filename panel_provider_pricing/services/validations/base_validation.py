@@ -8,7 +8,7 @@ class BaseValidation():
         return ". ".join(self.error_messages)
 
     def passed(self):
-        passsed = True
+        passed = True
 
         for param in self.required_params.keys():
             if not param:

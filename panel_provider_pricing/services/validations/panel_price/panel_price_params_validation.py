@@ -6,6 +6,8 @@ from panel_provider_pricing.services.validations import BaseValidation
 class PanelPriceParamsValidation(BaseValidation):
 
     def __init__(self, panel_price_params):
+        super().__init__()
+
         self.required_params = {
             "country_code": panel_price_params["country_code"],
             "target_group_id": panel_price_params["target_group_id"],
@@ -26,3 +28,5 @@ class PanelPriceParamsValidation(BaseValidation):
                 self.error_messages.append(
                     f"Not a JSON hash: {type(location)}, {location}"
                 )
+
+        return passed

@@ -13,9 +13,9 @@ class PanelProviderQuery():
 
 
     def call(self):
-        panel_provider = get_object_or_404(Country,
+        country = get_object_or_404(Country,
             country_code=self.params["country_code"]
-        ).select_related("panel_provider")
+        )
 
-        return panel_provider
+        return country.panel_provider
 

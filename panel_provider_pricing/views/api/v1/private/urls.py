@@ -16,6 +16,6 @@ urlpatterns = [
     path(
         "target_groups/<slug:country_code>/", TargetGroupsView.as_view(), name="api_v1_private_target_groups"),
     path(
-        "evaluate_target/", PanelPriceView.as_view(), name="api_v1_private_evaluate_target"
+        "evaluate_target", PanelPriceView.as_view(), name="api_v1_private_evaluate_target"
     ),
 ]
