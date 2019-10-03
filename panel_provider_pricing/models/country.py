@@ -10,7 +10,7 @@ class Country(models.Model):
     panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
     target_groups = models.ManyToManyField(TargetGroup)
 
-    country_code = models.CharField(max_length=20)
+    country_code = models.CharField(max_length=255)
 
     class Meta:
         db_table = "countries"

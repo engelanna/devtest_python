@@ -8,7 +8,7 @@ class LocationGroup(models.Model):
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL)
     panel_provider = models.ForeignKey(PanelProvider, null=True, on_delete=models.SET_NULL)
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
 
     class Meta:
         db_table = "location_groups"

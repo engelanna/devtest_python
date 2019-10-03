@@ -99,21 +99,24 @@
     "model": "panel_provider_pricing.panelprovider",
     "pk": 1,
     "fields": {
-      "code": "synthesize innovative relationships"
+      "code": "synthesize innovative relationships",
+      "price_calculation_strategy": "CharacterCount"
     }
   },
   {
     "model": "panel_provider_pricing.panelprovider",
     "pk": 2,
     "fields": {
-      "code": "disintermediate next-generation architectures"
+      "code": "disintermediate next-generation architectures",
+      "price_calculation_strategy": "ArrayCount"
     }
   },
   {
     "model": "panel_provider_pricing.panelprovider",
     "pk": 3,
     "fields": {
-      "code": "iterate granular interfaces"
+      "code": "iterate granular interfaces",
+      "price_calculation_strategy": "HTMLNodeCount"
     }
   },
   {

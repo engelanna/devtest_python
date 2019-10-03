@@ -9,8 +9,8 @@ class Location(models.Model):
 
     panel_size = models.IntegerField(default=0)
     external_id = models.IntegerField(default=None)
-    name = models.CharField(max_length=100)
-    secret_code = EncryptedCharField(max_length=100)
+    name = models.CharField(max_length=255)
+    secret_code = EncryptedCharField(max_length=255)
 
     class Meta:
         db_table = "locations"
