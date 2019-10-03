@@ -1,6 +1,6 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404
 
-from panel_provider_priving.models import Country, , Location, TargetGroup
+from panel_provider_priving.models import Country
 
 class PanelProviderQuery():
 
@@ -13,8 +13,8 @@ class PanelProviderQuery():
 
 
     def call(self):
-        panel_provider = Country.objects.filter(
-            country_code__exact=self.params["country_code"]
+        panel_provider = get_object_or_404(Country,
+            country_code=self.params["country_code"]
         ).select_related("panel_provider")
 
         return panel_provider

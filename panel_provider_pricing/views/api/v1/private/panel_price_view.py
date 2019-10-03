@@ -11,7 +11,6 @@ from panel_provider_pricing.services.validations import PanelPriceParamsValidati
 
 @permission_classes([IsAuthenticated])
 class PanelPriceView(APIView):
-    queryset = PanelProviderQuery(self._panel_params).call()
     serializer_class = PanelProviderSerializer
 
     def post(self, request):
@@ -30,12 +29,13 @@ class PanelPriceView(APIView):
             HTTP connections to external sites
         """
 
+        params = self._panel_price_params(request)
+        params_validation = PanelPriceParamsValidation.new(params)
+
         response = None
-        params_validation = PanelPriceParamsValidation.new(
-            self._panel_params(request))
 
         if params_validation.passed():
-            panel_provider = self.get_queryset();
+            panel_provider = PanelProviderQuery(params).call();
             response = self._serialized_ok_response(panel_provider)
         else:
             response = self._bad_request_response(params_validation)
@@ -43,7 +43,7 @@ class PanelPriceView(APIView):
         return response
 
 
-    def _panel_params(self, request):
+    def _panel_price_params(self, request):
         post_data = request.POST
 
         return {

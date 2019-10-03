@@ -20,6 +20,4 @@ class TargetGroupsView(APIView):
             country_code : string
         """
 
-        country = get_object_or_404(Country, country_code=country_code.upper())
-
         return redirect("api_v1_public_target_groups", country_code)

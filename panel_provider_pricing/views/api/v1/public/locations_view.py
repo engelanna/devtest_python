@@ -1,15 +1,18 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import permission_classes
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from panel_provider_pricing.models import Country, Location, LocationGroup
 from panel_provider_pricing.models.serializers import LocationSerializer
+from panel_provider_pricing.queries import LocationsQuery
+from panel_provider_pricing.services.validations import LocationParamsValidation
 
 
 @permission_classes([AllowAny])
 class LocationsView(APIView):
+    serializer_class = LocationSerializer
 
     def get(self, request, country_code):
         """
@@ -19,8 +22,31 @@ class LocationsView(APIView):
             country_code : str
         """
 
-        country = get_object_or_404(Country, country_code=country_code.upper())
-        location_group_ids = [lg.id for lg in LocationGroup.objects.filter(panel_provider_id=country.panel_provider_id)]
-        locations = Location.objects.filter(location_groups__in=location_group_ids)
+        params = self._location_params(country_code)
+        params_validation = LocationParamsValidation.new(params)
 
-        return Response(LocationSerializer(locations, many=True).data)
+        response = None
+
+        if params_validation.passed():
+            locations = LocationsQuery(params).call()
+            response = self._serialize_ok_response(locations)
+        else:
+            response = self._bad_request_response(params_validation)
+
+        return response
+
+
+    def _location_params(self, country_code):
+        return { "country_code": country_code }
+
+    def _serialize_ok_reponse(self, locations):
+        return Response(
+            get_serializer(locations, many=True).data,
+            status=HTTP_200_OK)
+
+    def _bad_request_response(self, failed_validation):
+        return Response({ "error": failed_validation.errors_as_a_sentence() },
+            status=HTTP_400_BAD_REQUEST)
+
+
+

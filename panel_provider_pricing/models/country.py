@@ -21,6 +21,10 @@ class Country(models.Model):
 
 @receiver(m2m_changed, sender=Country.target_groups.through)
 def check_if_all_target_groups_root(sender, **kwargs):
+    """
+    Called whenever the many-to-many relationship with target groups changes
+    """
+
     for pk in kwargs["pk_set"]:
         target_group = kwargs["model"].objects.get(pk=pk)
 

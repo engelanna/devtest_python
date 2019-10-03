@@ -1,0 +1,1 @@
+from .panel_price_params_validation import PanelPriceParamsValidation

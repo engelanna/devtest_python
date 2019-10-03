@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -19,7 +19,5 @@ class LocationsView(APIView):
         Params:
             country_code : str
         """
-
-        country = get_object_or_404(Country, country_code=country_code.upper())
 
         return redirect("api_v1_public_locations", country_code)

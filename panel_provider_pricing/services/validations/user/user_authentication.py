@@ -1,18 +1,15 @@
 from django.contrib.auth import authenticate
 
-from panel_provider_pricing.services.validations import BaseValidation
 
-
-class UserAuthentication(BaseValidation):
+class UserAuthentication():
 
     def __init__(self, user_params):
-        username = user_params["username"]
-        password = user_params["password"]
-        self.user = authenticate(username=username, password=password)
+         username = user_params["username"]
+         password = user_params["password"]
 
 
     def passed(self):
-        if self.user:
+        if authenticate(username=self.username, password=self.password):
             return True
         else:
             return False
