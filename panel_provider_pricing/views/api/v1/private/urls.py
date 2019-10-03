@@ -1,8 +1,8 @@
 from django.urls import path, include
 
-from .get_price_view import GetPriceView
 from .login_view import LoginView
 from .locations_view import LocationsView
+from .panel_price_view import PanelPriceView
 from .target_groups_view import TargetGroupsView
 
 
@@ -16,6 +16,6 @@ urlpatterns = [
     path(
         "target_groups/<slug:country_code>/", TargetGroupsView.as_view(), name="api_v1_private_target_groups"),
     path(
-        "evaluate_target/", GetPriceView.as_view(), name="api_v1_private_evaluate_target"
+        "evaluate_target/", PanelPriceView.as_view(), name="api_v1_private_evaluate_target"
     ),
 ]

@@ -1,4 +1,3 @@
-from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
@@ -28,13 +27,13 @@ class LoginView(APIView):
     """
 
     def post(self, request):
-        user_params = self._user_params(request)
         response = None
+        user_params = self._user_params(request)
 
         if UserParamsValidation(user_params).passed():
-            response = _authentication_response(user_params)
+            response = self._authentication_response(user_params)
         else:
-            response = _missing_params_response()
+            response = self._bad_request_response()
 
         return response
 
@@ -46,17 +45,29 @@ class LoginView(APIView):
         }
 
     def _authentication_response(self, params):
-        user_authentication = UserAuthentication(params)
         response = None
+        user_authentication = UserAuthentication(params)
 
         if user_authentication.passed():
             token, _created = Token.objects.get_or_create(
                 user=user_authentication.user)
-            response = Response({ "token": token.key }, status=HTTP_200_OK)
+            response = self._authentication_successful_response(token)
         else:
-          response = Response({ "error": "Invalid Credentials" }, status=  HTTP_404_NOT_FOUND)
+          response = self._authentication_failed_response()
 
         return response
 
-    def _missing_params_response(self):
-        return Response({"error": "Please provide both username and password"}, status=HTTP_400_BAD_REQUEST)
+    def _bad_request_response(self):
+        return Response(
+            { "error": "Please provide both username and password" },
+            status=HTTP_400_BAD_REQUEST
+        )
+
+    def _authentication_failed_response(self):
+        return Response(
+            { "error": "Invalid Credentials" },
+            status= HTTP_404_NOT_FOUND
+        )
+
+    def _authentication_successful_response(token):
+        return Response({ "token": token.key }, status=HTTP_200_OK)

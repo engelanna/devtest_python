@@ -1,10 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
-from rest_framework.status import (
-    HTTP_400_BAD_REQUEST,
-    HTTP_404_NOT_FOUND,
-    HTTP_200_OK
-)
+from rest_framework.status import HTTP_200_OK
 
 from panel_provider_pricing.tests.factories import UserFactory
 

@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate
+
 from panel_provider_pricing.services.validations import BaseValidation
 
 
