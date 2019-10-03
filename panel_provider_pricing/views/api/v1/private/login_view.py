@@ -9,7 +9,7 @@ from rest_framework.status import (
 )
 from rest_framework.views import APIView
 
-from panel_provider_pricing.services.validations import UserParamsValidation, UserAuthentication
+from panel_provider_pricing.services.validations.user import UserParamsValidation, UserAuthentication
 
 
 @permission_classes([AllowAny])

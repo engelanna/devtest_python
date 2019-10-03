@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from panel_provider_pricing.models.serializers import LocationSerializer
 from panel_provider_pricing.queries import LocationsQuery
-from panel_provider_pricing.services.validations import LocationParamsValidation
+from panel_provider_pricing.services.validations.location import LocationParamsValidation
 
 
 @permission_classes([AllowAny])

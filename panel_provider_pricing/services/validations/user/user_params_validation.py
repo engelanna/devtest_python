@@ -5,7 +5,7 @@ class UserParamsValidation(BaseValidation):
 
     def __init__(self, user_params):
         self.required_params = {
-            "username": user_params["username"]
+            "username": user_params["username"],
             "password": user_params["password"]
         }
 

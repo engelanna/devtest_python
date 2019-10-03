@@ -6,7 +6,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from panel_provider_pricing.models import Country
 from panel_provider_pricing.models.serializers import PanelProviderSerializer
 from panel_provider_pricing.queries import PanelProviderQuery
-from panel_provider_pricing.services.validations import PanelPriceParamsValidation
+from panel_provider_pricing.services.validations.panel_price import PanelPriceParamsValidation
 
 
 @permission_classes([IsAuthenticated])

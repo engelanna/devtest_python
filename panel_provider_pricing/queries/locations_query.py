@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from panel_provider_priving.models import Locations
+from panel_provider_pricing.models import Location, LocationGroup
 
 
 class LocationsQuery():

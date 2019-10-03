@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from panel_provider_pricing.models.serializers import TargetGroupSerializer
 from panel_provider_pricing.queries import TargetGroupsQuery
-from panel_provider_pricing.services.validations import TargetGroupParamsValidation
+from panel_provider_pricing.services.validations.target_group import TargetGroupParamsValidation
 
 
 @permission_classes([AllowAny])
