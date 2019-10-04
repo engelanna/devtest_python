@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404
 
-from panel_provider_pricing.models import Country, TargetGroup
+from panel_provider_pricing.models import (
+    Country,
+    TargetGroup
+)
 
 
 class TargetGroupsQuery():
