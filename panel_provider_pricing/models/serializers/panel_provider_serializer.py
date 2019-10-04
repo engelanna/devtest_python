@@ -1,7 +1,11 @@
 from rest_framework import serializers
 
 from panel_provider_pricing.models import PanelProvider
-from panel_provider_pricing.services.calculations.pricing_strategies import ArrayCount, CharacterCount, HTMLNodeCount
+from panel_provider_pricing.services.calculations.pricing_strategies import (
+    ArrayCount,
+    CharacterCount,
+    HTMLNodeCount
+)
 
 
 class PanelProviderSerializer(serializers.Serializer):

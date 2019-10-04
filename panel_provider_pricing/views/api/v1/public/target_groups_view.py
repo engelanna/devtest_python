@@ -3,15 +3,18 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import (
+    HTTP_200_OK,
+    HTTP_400_BAD_REQUEST
+)
+
 from panel_provider_pricing.models.serializers import TargetGroupSerializer
 from panel_provider_pricing.queries import TargetGroupsQuery
 from panel_provider_pricing.services.validations.target_group import TargetGroupParamsValidation
-
+from panel_provider_pricing.views.api import BasePricingAPIView
 
 @permission_classes([AllowAny])
-class TargetGroupsView(GenericAPIView):
+class TargetGroupsView(BasePricingAPIView, GenericAPIView):
     serializer_class = TargetGroupSerializer
 
     def get(self, request, country_code):
@@ -32,7 +35,7 @@ class TargetGroupsView(GenericAPIView):
 
         if params_validation.passed():
             target_groups = TargetGroupsQuery(params).call();
-            response = self._serialize_ok_response(target_groups)
+            response = self._serialized_ok_response(target_groups, many=True)
         else:
             response = self._bad_request_response(params_validation)
 
@@ -41,12 +44,3 @@ class TargetGroupsView(GenericAPIView):
 
     def _target_group_params(self, country_code):
         return { "country_code": country_code }
-
-    def _serialize_ok_response(self, target_groups):
-        return Response(
-            self.get_serializer(target_groups, many=True).data,
-            status=HTTP_200_OK)
-
-    def _bad_request_response(self, failed_validation):
-        return Response({ "error": failed_validation.errors_as_a_sentence() },
-            status=HTTP_400_BAD_REQUEST)

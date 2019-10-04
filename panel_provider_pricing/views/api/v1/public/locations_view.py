@@ -2,15 +2,15 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK
 
 from panel_provider_pricing.models.serializers import LocationSerializer
 from panel_provider_pricing.queries import LocationsQuery
 from panel_provider_pricing.services.validations.location import LocationParamsValidation
-
+from panel_provider_pricing.views.api import BasePricingAPIView
 
 @permission_classes([AllowAny])
-class LocationsView(GenericAPIView):
+class LocationsView(BasePricingAPIView, GenericAPIView):
     serializer_class = LocationSerializer
 
     def get(self, request, country_code):
@@ -28,7 +28,7 @@ class LocationsView(GenericAPIView):
 
         if params_validation.passed():
             locations = LocationsQuery(params).call()
-            response = self._serialize_ok_response(locations)
+            response = self._serialized_ok_response(locations, many=True)
         else:
             response = self._bad_request_response(params_validation)
 
@@ -37,15 +37,3 @@ class LocationsView(GenericAPIView):
 
     def _location_params(self, country_code):
         return { "country_code": country_code }
-
-    def _serialize_ok_response(self, locations):
-        return Response(
-            self.get_serializer(locations, many=True).data,
-            status=HTTP_200_OK)
-
-    def _bad_request_response(self, failed_validation):
-        return Response({ "error": failed_validation.errors_as_a_sentence() },
-            status=HTTP_400_BAD_REQUEST)
-
-
-

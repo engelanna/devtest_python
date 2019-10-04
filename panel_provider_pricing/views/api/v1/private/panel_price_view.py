@@ -2,17 +2,17 @@ from rest_framework.decorators import permission_classes
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK
 
 from panel_provider_pricing.models import Country
 from panel_provider_pricing.models.serializers import PanelProviderSerializer
 from panel_provider_pricing.queries import PanelProviderQuery
 from panel_provider_pricing.services.validations.panel_price import PanelPriceParamsValidation
+from panel_provider_pricing.views.api import BasePricingAPIView
 
 
 @permission_classes([IsAuthenticated])
-class PanelPriceView(GenericAPIView):
+class PanelPriceView(BasePricingAPIView, GenericAPIView):
     serializer_class = PanelProviderSerializer
 
     def post(self, request):
@@ -54,11 +54,4 @@ class PanelPriceView(GenericAPIView):
             "locations": post_data["locations"]
         }
 
-    def _bad_request_response(self, params_validation):
-        return Response( { "error": params_validation.errors_as_a_sentence() },
-            status=HTTP_400_BAD_REQUEST)
 
-    def _serialized_ok_response(self, panel_provider):
-        serialized_data = self.get_serializer(panel_provider).data
-
-        return Response(serialized_data, status=HTTP_200_OK)
